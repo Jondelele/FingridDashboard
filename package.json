@@ -1,0 +1,19 @@
+{
+  "name": "ohsihaharkkatyojoonaprehti",
+  "version": "1.0.0",
+  "description": "Ohsiha harkkatyo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10",
+    "pg": "^7.8.0",
+    "request": "^2.88.0",
+    "require": "^2.4.20"
+  }
+}
