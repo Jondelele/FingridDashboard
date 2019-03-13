@@ -9,5 +9,5 @@ request({
     'X-CMC_PRO_API_KEY': '1c66e485-86d9-46ba-bd20-2a84baf528ce'
   }
 }, (error, response, body) => {
-  console.log(body);
+  console.log(body.data[0]);
 });
