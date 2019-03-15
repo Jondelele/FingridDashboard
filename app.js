@@ -1,3 +1,4 @@
+// app.js Käynnistää serverin ja ottaa expressin käyttöön lukemalla sen muuttujaan app
 const config = require('./config');
 const api = require('./routes/api');
 var bodyParser = require('body-parser');
@@ -7,7 +8,6 @@ var express = require('express');
 
 var app = express();
 
-// Ottaa routterin kayttoon
 app.use(bodyParser.json());
 app.use(api);
 
