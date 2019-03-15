@@ -1,3 +1,6 @@
+// File that handles executing all of the queries no matter what the query is
+// data_base.js also opens up the database connection and creates the new pool
+// TODO: Find out how many db connections there are in the pool ???
 const { Pool } = require('pg')
   // TODO: Siirra conffiin
   const connectionString = "postgres://postgres:nobelaner@localhost:5432/cryptoApiDb";

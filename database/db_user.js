@@ -8,5 +8,7 @@ module.exports.getUserWithPassword = (userData) => {
   `;
   const sqlParams = [userData.username];
 
-  return db_driver.executeQuery(queryString, sqlParams);
+  return db_driver.executeQuery(queryString, sqlParams).then((res) => {
+    return res.length > 0 ? res[0] : null;
+  });
 }
