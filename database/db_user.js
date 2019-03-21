@@ -1,3 +1,9 @@
+// Tiedosto joka suorittaa user datan hakemisen kannasta. Db_user.js hoitaa 
+// querystringin luomisen oikeaoppisesti sql parametreja hyödyntäen
+// db_user.js ei siis tee varsinaista hakua
+// tietokantaan vaan sen hoitaa database_driver.js tiedosto.
+// Tama db_user.js kutsuu database_driver.js moduulin funktiota executeQuery
+// Joka vasta suorittaa varsinaisen haun
 const db_driver = require('./database_driver');
 
 module.exports.getUserWithPassword = (userData) => {
