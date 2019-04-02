@@ -57,6 +57,7 @@ router.post('/authenticate', (req, res) => {
 router.use((req, res, next) => {
 
   return res.status(404).send("Not found!");
+  // Todo: Seuraava vaihe
   // Validoi kayttajan json web token, json web tokenin avulla
 
   //Ohjaa käyttäjä login pagelle, jos ei autentikoitunut (res.redirect())

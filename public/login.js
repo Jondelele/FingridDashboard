@@ -5,19 +5,17 @@ $(document).ready(function(){
       var username = $("#txt_uname").val().trim();
       var password = $("#txt_pwd").val().trim();
 
+      // Jos username ja password eivät ole tyhjiä niin mennään serverin puolelle tarkistamaan ovat
+      // kirjautumistunnukset oikeita. Nodejs servulla route /authenticate käynnistää, koska käyttäjä
+      // pitää authenticoida. Käyttäjän username ja password lähetetään data objectissa nodejs servulle
       if( username != "" && password != "" ){
           $.ajax({
               url:'/authenticate',
               type:'post',
               data:{username,password},
               success:function(response){
-                  var msg = "";
-                  if(response == 1){
-                      window.location = "api_authentication.js";
-                  }else{
-                      msg = "Invalid username and password!";
-                  }
-                  $("#message").html(msg);
+                // Palautetaan clientille index.html sivu
+                window.location = "/index.html";
               }
           });
       }
