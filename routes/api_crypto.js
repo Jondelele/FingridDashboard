@@ -1,24 +1,18 @@
+const router = require('express').Router();
 const request = require('request');
-var express = require('express');
 var bodyParser = require('body-parser');
 
-var app = express();
-
-app.get('/', function (req, res) {
-  res.send('Ohsiha harkkatyo etusivu, Prehti')
-
+router.get('/data', function (req, res) {
   request({
-    url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+    url: 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=2019-01-01T01%3A01%3A01Z&end_time=2019-03-01T01%3A01%3A01Z',
     json: true,
     headers: {
-      'X-CMC_PRO_API_KEY': '1c66e485-86d9-46ba-bd20-2a84baf528ce'
+      'x-api-key': 'MOwvzyd8yH9KbABqnpCIZ49Lzkw2ruay7Yc1dcT3'
     }
   }, (error, response, body) => {
-    console.log(body.data[0]);
+    res.json(body);
   });
 
 });
 
-app.listen(8888, function () {
-  console.log('Example app listening on port 8888');
-});
+module.exports = router;
