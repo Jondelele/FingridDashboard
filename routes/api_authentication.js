@@ -1,6 +1,7 @@
 // api_authentication.js hoitaa käyttäjän autentikoimisen 
 const router = require('express').Router();
 const db_user = require('../database/db_user');
+const config = require('../config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -39,12 +40,13 @@ router.post('/authenticate', (req, res) => {
     // TODO: Secret pitaa laittaa conffiin
     // Jos se vastaa hashia niin luodaan käyttäjälle tokeni json web tokenilla, web tokeniin tallennetaan
     // käyttäjän dataa, käyttäjä id ainakin sekä username ja rooli
-    const token = jwt.sign({user_id: userDB.user_id}, 'fdfbddfbfbdfdb43434242srg', {expiresIn: '15 days'})
+    // Tokenin tiedot saadaan myöhemmin käyttöön decoded objectista
+    const token = jwt.sign({user_id: userDB.user_id}, config.secret, {expiresIn: '15 days'})
 
     // Lopuksi token palautetaan käyttäjälle takaisin ja käyttäjä lähettää sen meille joka kerta kun 
     // hän ottaa yhteyttä meidän servereihin jotta kykenemme tunnistamaan että kuka käyttäjä tekee
     // minkäkin requestin. Serverille ei ikinä tallenneta tokenia, se on ainoastaan clientin selaimessa.
-    res.cookie('authCookie', token);
+    res.cookie('authCookie', 'Bearer ' + token);
     return res.json({token});
   });
 
@@ -53,12 +55,46 @@ router.post('/authenticate', (req, res) => {
   });
 
 });
+
+// TODO: Logout router tähän, tuhotaan cookie ja redirect to login page.html
+
+
 // Tutkii onko käyttäjä autentikoitu
+// Tähän lohkoon mennään vain ja ainoastaan jos käyttäjä
+// koittaa mennä jollekkin sivulle joka vaatii sen että on autentikoitu
+// aka käyttäjällä on validi token
 router.use((req, res, next) => {
 
-  return res.status(404).send("Not found!");
+  // return res.status(404).send("Not found!");
   // Todo: Seuraava vaihe
   // Validoi kayttajan json web token, json web tokenin avulla
+  // bearerHeader sisältää käyttäjän tokenin 
+  const bearerHeader = req.headers['authorization'] || req.cookies ? req.cookies.authCookie : null;
+  console.log('Debug loggaus')
+
+  if(bearerHeader && bearerHeader.split(' ').length == 2){
+    // Split at the space
+    const bearer = bearerHeader.split(' ');
+    // Get token from array
+    const bearerToken = bearer[1];
+
+    // Tarkistetaan token. Nextiä kutsutaan vain jos err on null aka kaikki meni hyvin
+    // Jos errissä on jotain heitetään 403
+    jwt.verify(bearerToken, config.secret, (err, decoded) => {
+      if(err) {
+        res.status(403).redirect('/login.html');
+        // res.sendStatus(403);
+      } else {
+        req.decoded = decoded;
+        next();
+      }  
+    });
+
+  } else {
+    // Forbidden
+    res.status(403).redirect('/login.html');
+    // res.sendStatus(403);
+  }
 
   //Ohjaa käyttäjä login pagelle, jos ei autentikoitunut (res.redirect())
 

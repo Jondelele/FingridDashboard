@@ -1,5 +1,5 @@
 // app.js Käynnistää serverin ja ottaa expressin käyttöön lukemalla sen muuttujaan app
-// mitä muuta app.js filuun tulee???
+// 
 const config = require('./config');
 const api = require('./routes/api');
 var bodyParser = require('body-parser');
