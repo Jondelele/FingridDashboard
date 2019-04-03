@@ -16,11 +16,14 @@ const router = require('express').Router();
 
 // Jos req objectia muutetaan niin muutokset pysyvät
 router.use(public);
+//TODO: esim tahan voi laittaa rekisteröitymis routen
 router.use(api_authentication);
 // router.use(private); rivi on autentikoinnin alapuolella koska se sisältää resursseja
 // joihin saa päästä vasta autentikoinnin jälkeen käsiksi. Järjestys on tärkeä.
 router.use(private);
 router.use(api_crypto);
+//TODO: Authenticaten jälkeen uusi route jolla voidaan hallinnoida käyttäjiä joko adminin toimesta 
+// tai käyttäjän itsensä toimesta
 
 
 //Index page router oma filu
