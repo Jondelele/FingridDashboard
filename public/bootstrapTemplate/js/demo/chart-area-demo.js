@@ -2,23 +2,6 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-function apiData() {
-  // const request = require('request');
-  
-  // request({
-  //   url: 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=2019-01-01T01%3A01%3A01Z&end_time=2019-03-01T01%3A01%3A01Z',
-  //   json: true,
-  //   headers: {
-  //     'x-api-key': config.xApiKey
-  //   }
-  // }, (error, response, body) => {
-  //   return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  // });
-  return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-}
-
-
-
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -47,23 +30,28 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 var xhr = new XMLHttpRequest();
 
 xhr.addEventListener('load', function() {
-  console.log("Testi loggaus1111111 ----------------------------------------------")
-  if (1 == 1) { 
+  if (this.status == 200) {
+    var currentTime = new Date();
+    console.log(currentTime);
     var response = JSON.parse(this.responseText);
-    console.log(response[0])
-    // var characters = response.results;
-    // var characterData = [];
-    // characters.forEach(function(character) {
-    //   characterData.push([character.name, parseInt(character.height)]);
-    // });
+    var electricityPowerData = [];
+    var characterData = [];
 
+    response.forEach(function(oneHourData) {
+      // console.log(character.start_time + ":  " + character.value);
+      electricityPowerData.push([oneHourData.value]);
+    });
+
+    response.forEach(function(oneHourData) {
+      
+    });
 
     // Area Chart Example
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["0h","1h","3h","4h","5h","6h","7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h","19h","20h","21h","22h","23h","24h"],
         datasets: [{
           label: "Earnings",
           lineTension: 0.3,
@@ -77,7 +65,7 @@ xhr.addEventListener('load', function() {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: [0, 4000, 5000, 6000, 10000, 20000, 22000, 25000, 20000, 30000, 25000, 40000],
+          data: electricityPowerData,
         }],
       },
       options: {
@@ -100,16 +88,16 @@ xhr.addEventListener('load', function() {
               drawBorder: false
             },
             ticks: {
-              maxTicksLimit: 7
+              maxTicksLimit: 12
             }
           }],
           yAxes: [{
             ticks: {
-              maxTicksLimit: 5,
+              maxTicksLimit: 10,
               padding: 10,
               // Include a dollar sign in the ticks
               callback: function(value, index, values) {
-                return '$' + number_format(value);
+                return 'MW ' + number_format(value);
               }
             },
             gridLines: {
@@ -141,7 +129,7 @@ xhr.addEventListener('load', function() {
           callbacks: {
             label: function(tooltipItem, chart) {
               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+              return datasetLabel + ': MW' + number_format(tooltipItem.yLabel);
             }
           }
         }
@@ -151,6 +139,6 @@ xhr.addEventListener('load', function() {
 });
 
 
-xhr.open('GET', 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=2019-01-01T01%3A01%3A01Z&end_time=2019-03-01T01%3A01%3A01Z');
-xhr.setRequestHeader('x-api-key', 'MOwvzyd8yH9KbABqnpCIZ49Lzkw2ruay7Yc1dcT3');
+xhr.open('GET', '/data');
+// xhr.setRequestHeader('x-api-key', 'MOwvzyd8yH9KbABqnpCIZ49Lzkw2ruay7Yc1dcT3');
 xhr.send();
