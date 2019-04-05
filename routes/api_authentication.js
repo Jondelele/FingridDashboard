@@ -70,7 +70,6 @@ router.use((req, res, next) => {
   // Validoi kayttajan json web token, json web tokenin avulla
   // bearerHeader sisältää käyttäjän tokenin 
   const bearerHeader = req.headers['authorization'] || req.cookies ? req.cookies.authCookie : null;
-  console.log('Debug loggaus')
 
   if(bearerHeader && bearerHeader.split(' ').length == 2){
     // Split at the space
