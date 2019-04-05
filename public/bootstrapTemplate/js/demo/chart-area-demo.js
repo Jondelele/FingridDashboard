@@ -31,20 +31,18 @@ var xhr = new XMLHttpRequest();
 
 xhr.addEventListener('load', function() {
   if (this.status == 200) {
-    var currentTime = new Date();
-    console.log(currentTime);
     var response = JSON.parse(this.responseText);
     var electricityPowerData = [];
     var characterData = [];
 
     response.forEach(function(oneHourData) {
-      // console.log(character.start_time + ":  " + character.value);
+      console.log(oneHourData.start_time + ":  " + oneHourData.value);
       electricityPowerData.push([oneHourData.value]);
     });
 
-    response.forEach(function(oneHourData) {
-      
-    });
+    // response.forEach(function(oneHourData) {
+
+    // });
 
     // Area Chart Example
     var ctx = document.getElementById("myAreaChart");
@@ -53,7 +51,7 @@ xhr.addEventListener('load', function() {
       data: {
         labels: ["0h","1h","3h","4h","5h","6h","7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h","19h","20h","21h","22h","23h","24h"],
         datasets: [{
-          label: "Earnings",
+          label: "Electricity power",
           lineTension: 0.3,
           backgroundColor: "rgba(78, 115, 223, 0.05)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -138,7 +136,5 @@ xhr.addEventListener('load', function() {
   }
 });
 
-
-xhr.open('GET', '/data');
-// xhr.setRequestHeader('x-api-key', 'MOwvzyd8yH9KbABqnpCIZ49Lzkw2ruay7Yc1dcT3');
+xhr.open('GET', '/data/lastday');
 xhr.send();
