@@ -15,7 +15,7 @@ $(document).ready(function(){
               data:{username,password},
               success:function(response){
                 // Palautetaan clientille index.html sivu
-                window.location = "/index.html";
+                window.location = "/bootstrapTemplate/index.html";
               }
           });
       }
