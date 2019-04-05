@@ -35,6 +35,7 @@ xhr.addEventListener('load', function() {
     var electricityPowerData = [];
     var characterData = [];
 
+    console.log("Arrayn koko: " + response.length);
     response.forEach(function(oneHourData) {
       console.log(oneHourData.start_time + ":  " + oneHourData.value);
       electricityPowerData.push([oneHourData.value]);
@@ -49,7 +50,7 @@ xhr.addEventListener('load', function() {
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["0h","1h","3h","4h","5h","6h","7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h","19h","20h","21h","22h","23h","24h"],
+        labels: ['26h', '25h', '24h', '23h', '22h', '21h', '20h', '19h', '18h', '17h', '16h', '15h', '14h', '13h', '12h', '11h', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h'],
         datasets: [{
           label: "Electricity power",
           lineTension: 0.3,
@@ -78,6 +79,10 @@ xhr.addEventListener('load', function() {
         },
         scales: {
           xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Mittauksen ikä (h)'
+            },
             time: {
               unit: 'date'
             },
@@ -86,12 +91,16 @@ xhr.addEventListener('load', function() {
               drawBorder: false
             },
             ticks: {
-              maxTicksLimit: 12
+              maxTicksLimit: 24
             }
           }],
           yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Sähköteho (MW)'
+            },
             ticks: {
-              maxTicksLimit: 10,
+              maxTicksLimit: 12,
               padding: 10,
               // Include a dollar sign in the ticks
               callback: function(value, index, values) {
