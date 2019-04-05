@@ -12,8 +12,8 @@ router.get('/data/lastday', function (req, res) {
   var currentDate = moment().subtract(4, 'hours');
   var yesterdaysDate = moment().subtract(27, 'hours');
 
-  var apiQueryUrl = 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=' + yesterdaysDate.format('YYYY-MM-DDT') + yesterdaysDate.format('HH:00:00') + 'Z'
-                                                                     + '&end_time=' + currentDate.format('YYYY-MM-DDT') + currentDate.format('HH:00:00') + 'Z';
+  var apiQueryUrl = 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=' + yesterdaysDate.format('YYYY-MM-DDT') + 
+                      yesterdaysDate.format('HH:00:00') + 'Z' + '&end_time=' + currentDate.format('YYYY-MM-DDT') + currentDate.format('HH:00:00') + 'Z';
 
   request({
     url: apiQueryUrl,

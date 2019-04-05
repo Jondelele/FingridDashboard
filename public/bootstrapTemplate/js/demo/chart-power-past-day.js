@@ -33,17 +33,12 @@ xhr.addEventListener('load', function() {
   if (this.status == 200) {
     var response = JSON.parse(this.responseText);
     var electricityPowerData = [];
-    var characterData = [];
 
     console.log("Arrayn koko: " + response.length);
     response.forEach(function(oneHourData) {
       console.log(oneHourData.start_time + ":  " + oneHourData.value);
       electricityPowerData.push([oneHourData.value]);
     });
-
-    // response.forEach(function(oneHourData) {
-
-    // });
 
     // Area Chart Example
     var ctx = document.getElementById("myAreaChart");
@@ -52,7 +47,7 @@ xhr.addEventListener('load', function() {
       data: {
         labels: ['26h', '25h', '24h', '23h', '22h', '21h', '20h', '19h', '18h', '17h', '16h', '15h', '14h', '13h', '12h', '11h', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h'],
         datasets: [{
-          label: "Electricity power",
+          label: "Sähköteho",
           lineTension: 0.3,
           backgroundColor: "rgba(78, 115, 223, 0.05)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -136,7 +131,7 @@ xhr.addEventListener('load', function() {
           callbacks: {
             label: function(tooltipItem, chart) {
               var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-              return datasetLabel + ': MW' + number_format(tooltipItem.yLabel);
+              return datasetLabel + ': MW ' + number_format(tooltipItem.yLabel);
             }
           }
         }
