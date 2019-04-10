@@ -1,2 +1,2 @@
-# OhsihaCryptocurApiPrehti
-Ohsiha NodeJs application to show interesting cryptocurrency information.
+# FingridDashboard
+Node.js dashboard web application which queries data from Fingrids API and shows it to the user
