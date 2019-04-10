@@ -41,7 +41,6 @@ router.get('/data/power-now', function (req, res) {
       'x-api-key': config.xApiKey
     }
   }, (error, response, body) => {
-    console.log(body);
     res.json(body);
   });
 });

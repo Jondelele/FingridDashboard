@@ -34,7 +34,6 @@ xhr.addEventListener('load', function() {
     var response = JSON.parse(this.responseText);
     var electricityPowerData = [];
 
-    console.log("Arrayn koko: " + response.length);
     response.forEach(function(oneHourData) {
       console.log(oneHourData.start_time + ":  " + oneHourData.value);
       electricityPowerData.push([oneHourData.value]);

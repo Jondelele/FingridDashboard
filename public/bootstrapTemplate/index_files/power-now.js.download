@@ -1,0 +1,20 @@
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener('load', function() {
+  if (this.status == 200) {
+    var response = JSON.parse(this.responseText);
+    var electricityPowerData = [];
+
+    console.log("Arrayn koko: " + response.length);
+
+    $("#power-now").text(response[response.length-1].value + " MW");
+    document.getElementById("myProgress").value = "75";
+  
+  } else {
+    $("#power-now").text("Couldn't load data");
+    document.getElementById("myProgress").value = "0";
+  }
+});
+
+xhr.open('GET', '/data/lastday');
+xhr.send();
