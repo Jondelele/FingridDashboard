@@ -1,10 +1,7 @@
 const router = require('express').Router();
 const request = require('request');
-// var moment = require('moment');
 var moment = require('moment-timezone');
 moment().tz("Europe/Helsinki").format();
-
-// moment().format();
 const config = require('../config');
 
 router.get('/data/lastday', function (req, res) {
