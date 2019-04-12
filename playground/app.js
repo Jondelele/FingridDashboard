@@ -1,6 +1,7 @@
 const request = require('request');
 var express = require('express');
 var bodyParser = require('body-parser');
+var config = require('../config');
 
 var app = express();
 
@@ -24,7 +25,7 @@ app.get('/', function (req, res) {
   // });
 
   const { Pool } = require('pg')
-  const connectionString = "postgres://postgres:nobelaner@localhost:5432/cryptoApiDb";
+  const connectionString = config.connectionString;
   const pool = new Pool({
     connectionString: connectionString,
   })
