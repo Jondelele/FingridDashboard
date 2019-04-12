@@ -52,6 +52,7 @@ router.post('/authenticate', (req, res) => {
 
   }).catch((e) => {
     // Palauetetaan virhe ilmo käyttäjälle
+    return res.json(e);
   });
 
 });
