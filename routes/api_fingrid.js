@@ -14,9 +14,10 @@ router.get('/data/lastday', function (req, res) {
 
   // Luodaan query URL joka hakee viimeisen 24h ajalta Venäjän Suomeen myymän sähkön tehon tunnin välein mitattuna
   var apiQueryUrl = 'https://api.fingrid.fi/v1/variable/58/events/json?start_time=' + yesterdaysDate.format('YYYY-MM-DDT') + 
-                      yesterdaysDate.format('HH:00:00') + 'Z' + '&end_time=' + currentDate.format('YYYY-MM-DDT') + currentDate.format('HH:00:00') + 'Z';
+        yesterdaysDate.format('HH:00:00') + 'Z' + '&end_time=' + currentDate.format('YYYY-MM-DDT') + currentDate.format('HH:00:00') + 'Z';
 
-  // Request kirjasto mahdollistaa queryn tekemisen. Queryyn laitetaan mukaan x-api-key, jotta Fingridin REST API tunnistaa kuka kutsun tekee
+  // Request kirjasto mahdollistaa queryn tekemisen. Queryyn laitetaan mukaan 
+  // x-api-key, jotta Fingridin REST API tunnistaa kuka kutsun tekee
   request({
     url: apiQueryUrl,
     json: true,
