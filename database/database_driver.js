@@ -23,12 +23,12 @@ module.exports.executeQuery = (queryString, sqlParams) => {
       return client.query(queryString, sqlParams)
         .then(res => {
           client.release();
-          console.log(res.rows[0]);
+          // console.log(res.rows[0]);
           return resolve(res.rows);
         })
         .catch(e => {
           client.release();
-          console.log(e);
+          // console.log(e);
           return reject(e);
         })
     })

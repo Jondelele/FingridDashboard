@@ -59,5 +59,5 @@ app.listen(config.httpPort, function () {
     port = 8000;
   }
   app.listen(port);
-  console.log('Example app listening on port ' + config.httpPort);
+  // console.log('Example app listening on port ' + config.httpPort);
 });

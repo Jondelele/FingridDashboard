@@ -35,7 +35,7 @@ xhr.addEventListener('load', function() {
     var electricityPowerData = [];
 
     response.forEach(function(oneHourData) {
-      console.log(oneHourData.start_time + ":  " + oneHourData.value);
+      // console.log(oneHourData.start_time + ":  " + oneHourData.value);
       electricityPowerData.push([oneHourData.value]);
     });
 
