@@ -1,3 +1,4 @@
+// Moduuli joka asettaa private kansion tiedostot staattisiksi tiedostoiksi
 const router = require('express').Router();
 var express = require('express');
 const path = require("path")

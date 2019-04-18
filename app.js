@@ -4,9 +4,6 @@ const config = require('./config');
 const api = require('./routes/api');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser')
-const path = require("path")
-
-const request = require('request');
 var express = require('express');
 
 var app = express();
@@ -50,8 +47,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Pitaa olla ennen api:a koska muuten ei näy sinne
 app.use(cookieParser())
 app.use(api);
-
-
 
 app.listen(config.httpPort, function () {
   let port = process.env.PORT;
